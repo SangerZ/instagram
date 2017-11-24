@@ -22,11 +22,10 @@ export class HomePage implements OnInit {
     platform.ready().then(() => {
 
       geolocation.getCurrentPosition().then(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude);
+        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude + ' this is getCurrentPosition');
       });
-
       const watch = geolocation.watchPosition().subscribe(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude);
+        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude + ' this is watchPosition');
       });
       watch.unsubscribe();
     });
@@ -66,6 +65,10 @@ export class HomePage implements OnInit {
               correctOrientation: true
             }
             this.camera.getPicture(option).then((imageData) => {
+              this.geolocation.getCurrentPosition().then(position => {
+                this.photos.push({ src: "data:image/jpeg;base64," + imageData, likes: 0, lat: position.coords.latitude, long: position.coords.longitude });
+
+              });
               this.photos.push({ src: "data:image/jpeg;base64," + imageData, likes: 0 });
             }, (err) => {
               console.log(err);
