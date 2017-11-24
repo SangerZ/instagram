@@ -10,6 +10,8 @@ import { HomePage } from '../pages/home/home';
 
 import {AngularFireModule} from 'angularfire2';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyAnueeOcED0KfSGZcOdqdSq3jgQc4hqG9w",
   authDomain: "uploadtest-20647.firebaseapp.com",
@@ -38,6 +40,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Camera,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

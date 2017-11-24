@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FirebaseListObservable, AngularFire } from 'angularfire2';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Platform } from 'ionic-angular';
 
 import { AlertController } from 'ionic-angular';
 
@@ -10,7 +12,26 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage implements OnInit {
 
-  constructor(private af: AngularFire, private camera: Camera, public alerCtrl: AlertController) { }
+  constructor(
+    private af: AngularFire, 
+    private camera: Camera, 
+    public alerCtrl: AlertController,
+    private platform: Platform, 
+    private geolocation: Geolocation
+  ) { 
+    platform.ready().then(() => {
+
+      geolocation.getCurrentPosition().then(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude);
+      });
+
+      const watch = geolocation.watchPosition().subscribe(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', long: ' + pos.coords.longitude);
+      });
+      watch.unsubscribe();
+    });
+
+  }
 
   photos: FirebaseListObservable<any>;
 

@@ -8,6 +8,9 @@
   <ion-card *ngFor="let photo of photos | async">
     <ion-card-content>
       <img [src]="photo.src" />
+      <button ion-button block color="secondary">
+        <ion-icon name="star"></ion-icon>      
+      </button>
       <button (click)="likePhoto(photo.$key, photo.likes)" ion-button block>
         <ion-icon name="heart"></ion-icon>
         <ion-badge item-right>{{photo.likes}}</ion-badge>

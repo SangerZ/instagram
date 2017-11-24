@@ -12,3 +12,4 @@ Instagram sample Ionic application using Camera Ionic Native plugin.
 * npm install
 * ionic serve
 * ionic upload (login, upload, run it in the Ionic View application)
+* peanut peanut
